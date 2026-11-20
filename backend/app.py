@@ -41,6 +41,10 @@ def create_app():
     register_blueprints(app)
     register_error_handlers(app)
 
+    @app.get("/")
+    def home():
+        return jsonify({"status": "running", "service": "Student Academic Management API"})
+
     @app.get("/api/health")
     def health():
         query_one("SELECT 1 AS ok")  # raises -> 503 handler if MySQL is unreachable
